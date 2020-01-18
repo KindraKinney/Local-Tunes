@@ -13,10 +13,11 @@ $(document).ready(() => {
     })
     .then(function(response) {
         console.log(response)
+        // global var for testing remove global scope declaration before final version
         artistData = response;
 
         // if we get an error in repsonse to our request, alert the user the failure message reponse
-        if (artistData.error == 6) {
+        if (artistData.error === 6) {
             alert(artistData.message)
         }
         // write API response to page for top artist in user specified country
