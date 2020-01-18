@@ -15,12 +15,25 @@
     <title>Local Tunes</title>
 </head>
 <body>
-    <div class="navbar">
-
+    <div class="mdc-card">
+        <div class="mdc-text-field">
+            <input class="mdc-text-field__input" id="user-input">
+            <div class="mdc-line-ripple"></div>
+            <label for="text-field-hero-input" class="mdc-floating-label">City</label>
+        </div>
+        <button class="mdc-button">
+            <div class="mdc-button__ripple" id='get-location'></div>
+            <span class="mdc-button__label">Get My Location!</span>
+        </button>
+        <button class="mdc-button">
+            <div class="mdc-button__ripple" id='search'></div>
+            <span class="mdc-button__label">Search</span>
+        </button>
     </div>
-    <div class="container">
-
+    <div class="mdc-card" id='output-box'>
     </div>
-</body>
+
+
     <script src="assets/js/fetchInfo.js"></script>
+</body>
 </html>
