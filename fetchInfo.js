@@ -1,11 +1,10 @@
 
 $(document).ready(() => {
-  const str;
   $('#submit').on('click', () => {
 
-    let appkey = "b042048f34de31fadd86d7ae7af31d7e";
-    let countryChoice = prompt("Enter country using ISO code (spain, canada):");        
-    let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
+    const appkey = "b042048f34de31fadd86d7ae7af31d7e";
+    const countryChoice = $('#user-input').val();
+    const queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
 
     $.ajax({
         url: queryURL,
@@ -30,15 +29,27 @@ $(document).ready(() => {
             listeners: response.topartists.artist[0].listeners
             }
 
-            document.write(artistData.artistName);
-            document.write(`\n Listeners: ${artistData.listeners}`)
-            
-        }
-    })
-    
-    str = $('#user-input').val();
+            function outputBox(){
 
-  
+              let songName = "mmmBop";
+              let artistName = "Hansen";
+              let mainInfo = $("<div class='output-box'>");
+              let songDiv = $("<div class='song'>");
+              $(songDiv).addClass("mdc-typography--headline6")
+              let artistDiv = $("<div class='artist'>");
+              $(artistDiv).addClass("mdc-typography--subtitle1");
+              let pOne = $("<p>").text("Song Title: " + songName);
+              songDiv.append(pOne);
+              mainInfo.append(songDiv);
+              let pTwo = $("<p>").text("Artist Name: " + artistName);
+              artistDiv.append(pTwo);
+              mainInfo.append(artistDiv);
+              $("#output-box").prepend(mainInfo);
+              }
+
+              outputBox();
+        }
+    });
   });
 
 
@@ -57,27 +68,3 @@ function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude +
   "<br>Longitude: " + position.coords.longitude;
 }
- 
- 
-
-  //JQUERY FUNCTION FOR SETTING SONGNAME AND ARTIST NAME TO OUTPUTBOX DIV//
-//   function outputBox(){
-
-// let songName = "mmmBop";
-// let artistName = "Hansen";
-// let mainInfo = $("<div class='output-box'>");
-// let songDiv = $("<div class='song'>");
-// $(songDiv).addClass("mdc-typography--headline6")
-// let artistDiv = $("<div class='artist'>");
-// $(artistDiv).addClass("mdc-typography--subtitle1");
-// let pOne = $("<p>").text("Song Title: " + songName);
-// songDiv.append(pOne);
-// mainInfo.append(songDiv);
-// let pTwo = $("<p>").text("Artist Name: " + artistName);
-// artistDiv.append(pTwo);
-// mainInfo.append(artistDiv);
-// $("#output-box").prepend(mainInfo);
-// }
-  
-
-// outputBox();
