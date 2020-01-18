@@ -7,6 +7,7 @@
     <title>Local Tunes Roadies</title>
 
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -15,23 +16,29 @@
     <title>Local Tunes</title>
 </head>
 <body>
-    <div class="mdc-card">
-        <div class="mdc-text-field">
-            <input class="mdc-text-field__input" id="user-input">
-            <div class="mdc-line-ripple"></div>
-            <label for="text-field-hero-input" class="mdc-floating-label">City</label>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <div class="mdc-card">
+                    <div class="mdc-text-field">
+                        <input class="mdc-text-field__input" id="user-input">
+                        <div class="mdc-line-ripple"></div>
+                        <label for="text-field-hero-input" class="mdc-floating-label">City</label>
+                    </div>
+                    <button class="mdc-button">
+                        <div class="mdc-button__ripple" id='get-location'></div>
+                        <span class="mdc-button__label">Get My Location!</span>
+                    </button>
+                    <button class="mdc-button">
+                        <div class="mdc-button__ripple" id='search'></div>
+                        <span class="mdc-button__label">Search</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <button class="mdc-button">
-            <div class="mdc-button__ripple" id='get-location'></div>
-            <span class="mdc-button__label">Get My Location!</span>
-        </button>
-        <button class="mdc-button">
-            <div class="mdc-button__ripple" id='search'></div>
-            <span class="mdc-button__label">Search</span>
-        </button>
-    </div>
-    <div class="mdc-card" id='output-box'>
-    </div>
+      </div>
+
+
 
 
     <script src="assets/js/fetchInfo.js"></script>
