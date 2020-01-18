@@ -1,1 +1,0 @@
-console.log("fetchInfo.js loaded")
