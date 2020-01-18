@@ -4,17 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Tunes Roadies</title>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDgOSlLxkCGDI8WNhRnseNz_4E7r7qAn4 &callback=initMap"
+    type="text/javascript"></script>
     <title>Local Tunes</title>
 </head>
 <body>
-    <div class="navbar">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <div class="mdc-card">
+                    <div class="mdc-text-field">
+                        <input class="mdc-text-field__input" id="user-input">
+                        <div class="mdc-line-ripple"></div>
+                        <label for="text-field-hero-input" class="mdc-floating-label">City</label>
+                    </div>
+                    <button class="mdc-button">
+                        <div class="mdc-button__ripple" id='get-location'></div>
+                        <span class="mdc-button__label">Get My Location!</span>
+                    </button>
+                    <button class="mdc-button">
+                        <div class="mdc-button__ripple" id='search'></div>
+                        <span class="mdc-button__label">Search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+      </div>
 
-    </div>
-    <div class="container">
 
-    </div>
+
+
+    <script src="assets/js/fetchInfo.js"></script>
 </body>
-    <script src="fetchInfo.js"></script>
 </html>
