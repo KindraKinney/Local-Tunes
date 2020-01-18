@@ -20,11 +20,9 @@
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell">
                 <div class="mdc-card">
-                    <div class="mdc-text-field">
-                        <input class="mdc-text-field__input" id="user-input">
-                        <div class="mdc-line-ripple"></div>
-                        <label for="text-field-hero-input" class="mdc-floating-label">City</label>
-                    </div>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label">
+                        <input type="text" class="mdc-text-field__input" id='user-input' aria-label="Label" placeholder='City Name'>
+                      </div>
                     <button class="mdc-button">
                         <div class="mdc-button__ripple" id='get-location'></div>
                         <span class="mdc-button__label">Get My Location!</span>
@@ -35,9 +33,12 @@
                     </button>
                 </div>
             </div>
+            <div class="mdc-layout-grid__cell">
+                <div class="mdc-card" id='output-box'>
+                </div>
+            </div>
         </div>
       </div>
-
 
 
 
