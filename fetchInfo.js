@@ -55,16 +55,45 @@ $(document).ready(() => {
 
 });
 
-var x = document.getElementById("demo");
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+let button = document.getElementById("get-location");
+let latText = document.getElementById("latitude");
+let longText = document.getElementById("longitude");
+
+button.addEventListener("click", function() {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+
+    latText.innerText = lat.toFixed(2);
+    longText.innerText = long.toFixed(2);
+  });
+});
 
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude +
   "<br>Longitude: " + position.coords.longitude;
 }
+
+
+
+  //JQUERY FUNCTION FOR SETTING SONGNAME AND ARTIST NAME TO OUTPUTBOX DIV//
+//   function outputBox(){
+
+// let songName = "mmmBop";
+// let artistName = "Hansen";
+// let mainInfo = $("<div class='output-box'>");
+// let songDiv = $("<div class='song'>");
+// $(songDiv).addClass("mdc-typography--headline6")
+// let artistDiv = $("<div class='artist'>");
+// $(artistDiv).addClass("mdc-typography--subtitle1");
+// let pOne = $("<p>").text("Song Title: " + songName);
+// songDiv.append(pOne);
+// mainInfo.append(songDiv);
+// let pTwo = $("<p>").text("Artist Name: " + artistName);
+// artistDiv.append(pTwo);
+// mainInfo.append(artistDiv);
+// $("#output-box").prepend(mainInfo);
+// }
+
+
+// outputBox();
