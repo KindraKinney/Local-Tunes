@@ -2,36 +2,35 @@
 $(document).ready(() => {
   const str;
   $('#submit').on('click', () => {
-
+      
     let appkey = "b042048f34de31fadd86d7ae7af31d7e";
     let countryChoice = prompt("Enter country using ISO code (spain, canada):");        
-    let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
+    let numOfTracks = prompt("Enter number of songs you want:");
+    // let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
+    let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&limit=${numOfTracks}&country=${countryChoice}&api_key=${appkey}&format=json`;
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-    .then(function(response) {
-        console.log(response)
-
-        // if we get an error in repsonse to our request, alert the user the failure message reponse
+    // if we get an error in repsonse to our request, alert the user the failure message reponse
         if (response.error == 6) {
             alert(response.message)
         }
         // write API response to page for top artist in user specified country
         else{
-            // create an object that holds relevant data responses from API
-            let artistData = {
-            response: response,
-            error: response.error,
-            errorMsg: response.message,
-            artistName: response.topartists.artist[0].name,
-            images: response.topartists.artist[0].image[0]["#text"],
-            listeners: response.topartists.artist[0].listeners
+            let trackNameArr = [];
+            let listenArr = [];
+            let trackData = {
+                response: response,
+                titles: trackNameArr,
+                listens: listenArr
             }
-
-            document.write(artistData.artistName);
-            document.write(`\n Listeners: ${artistData.listeners}`)
+            for (let i = 0; i < numOfTracks; i++) {
+                let currentTrack = response.tracks.track[i].name;
+                let currentListen = response.tracks.track[i].listeners;
+                trackNameArr.push(currentTrack);
+                // listenArr.push(currentListen);
+                trackNameArr.push(`Listens: ${currentListen}`);
+                trackNameArr.push("<br>");
+            }
+            document.write(JSON.stringify(trackData.titles));
             
         }
     })
