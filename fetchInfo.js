@@ -32,33 +32,24 @@ $(document).ready(() => {
                 for (let i = 0; i < numOfTracks; i++) {
                     let currentTrack = response.tracks.track[i].name;
                     let currentListen = response.tracks.track[i].listeners;
-                    trackNameArr.push(currentTrack);
+                    let currentArtist = response.tracks.track[i].artist.name;
+                    console.log(currentArtist)
+                    //learned how to do this in my tudoring this morning, dynamically creating HTML with the tilda key
+                    let topPicks = `<div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+                                    <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
+                                    <div class="mdc-typography--subtitle1">Listen Count: ${currentListen}</div>
+                                    <br>`
+                                    $("#output-box").append(topPicks);
+                    // trackNameArr.push(currentTrack);
                     // listenArr.push(currentListen);
-                    trackNameArr.push(`Listens: ${currentListen}`);
-                    trackNameArr.push("<br>");
+                    // trackNameArr.push(`Listens: ${currentListen}`);
+                    // trackNameArr.push("<br>");
                 }
+                $("#output-box").prepend("<div class='mdc-typography--headline4'>Top Tracks</div>", "<br>");
+
                 // push title and listen count data to screen
-                document.write(JSON.stringify(trackData.titles));
-  
-              function outputBox(){
-  
-                let songName = "mmmBop";
-                let artistName = "Hansen";
-                let mainInfo = $("<div class='output-box'>");
-                let songDiv = $("<div class='song'>");
-                $(songDiv).addClass("mdc-typography--headline6")
-                let artistDiv = $("<div class='artist'>");
-                $(artistDiv).addClass("mdc-typography--subtitle1");
-                let pOne = $("<p>").text("Song Title: " + songName);
-                songDiv.append(pOne);
-                mainInfo.append(songDiv);
-                let pTwo = $("<p>").text("Artist Name: " + artistName);
-                artistDiv.append(pTwo);
-                mainInfo.append(artistDiv);
-                $("#output-box").prepend(mainInfo);
-                }
-  
-                outputBox();
+                // document.write(JSON.stringify(trackData.titles));  
+              
           }
       });
     });
