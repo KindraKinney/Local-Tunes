@@ -61,13 +61,22 @@ $(document).ready(() => {
     var startPos;
     var geoSuccess = function(position) {
       startPos = position;
-      document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-      document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+      latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
+      APIkey = "AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI";
+      queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlng + "&key=" + APIkey;
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(response => {
+        console.log(response.results[7].address_components[0].long_name);
+      });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
+
   };
   
-  
+ 
   
     //JQUERY FUNCTION FOR SETTING SONGNAME AND ARTIST NAME TO OUTPUTBOX DIV//
   //   function outputBox(){
