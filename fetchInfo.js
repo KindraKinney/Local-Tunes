@@ -31,77 +31,37 @@ $(document).ready(() => {
                 for (let i = 0; i < numOfTracks; i++) {
                     let currentTrack = response.tracks.track[i].name;
                     let currentListen = response.tracks.track[i].listeners;
-                    trackNameArr.push(currentTrack);
-                    // listenArr.push(currentListen);
-                    trackNameArr.push(`Listens: ${currentListen}`);
-                    trackNameArr.push("<br>");
+                    let currentArtist = response.tracks.track[i].artist.name;
+                    let topPicks = `<div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+                                    <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
+                                    <div class="mdc-typography--subtitle1">Listen Count: ${currentListen}</div>
+                                    <br>`
+                                    $("#output-box").append(topPicks);
                 }
-                // push title and listen count data to screen
-                document.write(JSON.stringify(trackData.titles));
-  
-              function outputBox(){
-  
-                let songName = "mmmBop";
-                let artistName = "Hansen";
-                let mainInfo = $("<div class='output-box'>");
-                let songDiv = $("<div class='song'>");
-                $(songDiv).addClass("mdc-typography--headline6")
-                let artistDiv = $("<div class='artist'>");
-                $(artistDiv).addClass("mdc-typography--subtitle1");
-                let pOne = $("<p>").text("Song Title: " + songName);
-                songDiv.append(pOne);
-                mainInfo.append(songDiv);
-                let pTwo = $("<p>").text("Artist Name: " + artistName);
-                artistDiv.append(pTwo);
-                mainInfo.append(artistDiv);
-                $("#output-box").prepend(mainInfo);
-                }
-  
-                outputBox();
+                $("#output-box").prepend("<div class='mdc-typography--headline4'>Top Tracks</div>", "<br>");
+              
           }
       });
     });
   
-  let button = document.getElementById("get-location");
-  let latText = document.getElementById("latitude");
-  let longText = document.getElementById("longitude");
   
-  button.addEventListener("click", function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      let lat = position.coords.latitude;
-      let long = position.coords.longitude;
-  
-      latText.innerText = lat.toFixed(2);
-      longText.innerText = long.toFixed(2);
-    });
   });
   
-  function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-  }
-  
-  
-  
-    //JQUERY FUNCTION FOR SETTING SONGNAME AND ARTIST NAME TO OUTPUTBOX DIV//
-  //   function outputBox(){
-  
-  // let songName = "mmmBop";
-  // let artistName = "Hansen";
-  // let mainInfo = $("<div class='output-box'>");
-  // let songDiv = $("<div class='song'>");
-  // $(songDiv).addClass("mdc-typography--headline6")
-  // let artistDiv = $("<div class='artist'>");
-  // $(artistDiv).addClass("mdc-typography--subtitle1");
-  // let pOne = $("<p>").text("Song Title: " + songName);
-  // songDiv.append(pOne);
-  // mainInfo.append(songDiv);
-  // let pTwo = $("<p>").text("Artist Name: " + artistName);
-  // artistDiv.append(pTwo);
-  // mainInfo.append(artistDiv);
-  // $("#output-box").prepend(mainInfo);
-  // }
-  
-  
-  // outputBox();
-  
+  window.onload = function() {
+    var startPos;
+    var geoSuccess = function(position) {
+      startPos = position;
+      latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
+      APIkey = "AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI";
+      queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlng + "&key=" + APIkey;
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(response => {
+        console.log(response.results[7].address_components[0].long_name);
+      });
+    };
+    navigator.geolocation.getCurrentPosition(geoSuccess);
+
+  };
