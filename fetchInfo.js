@@ -1,5 +1,5 @@
 
-$("document").ready(() => {
+$(document).ready(() => {
     $('#submit').on('click', () => {
       debugger;
 
