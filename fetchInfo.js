@@ -1,19 +1,20 @@
 
-$(document).ready(() => {
+$("document").ready(() => {
     $('#submit').on('click', () => {
+      debugger;
 
-      let countryCode = prompt("Please enter country (ISO CODE)");
+      let countryCode = $("#user-input").val();
       let makeRequest = $("<script>").attr("src", `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`)
-      $(document).append(makeRequest);
+      $("body").append(makeRequest);
+    });
+  });
 
-      function response(musicData) {
-        let data = responseData;
-        let title = data.message.body.track_list[1].track
-        document.write(title)
-        let artist = data.message.body.track_list[1].track.artist_name
-        document.write(artist)
-      }
-    
+  function response(musicData) {
+    console.log(musicData)
+    let data = musicData;
+    let title = data.message.body.track_list[1].track
+    let artist = data.message.body.track_list[1].track.artist_name
+  }
             // if we get an error in repsonse to our request, alert the user the failure message reponse
             if (response.error == 6) {
                 alert(response.message)
