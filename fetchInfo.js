@@ -4,9 +4,9 @@ $(document).ready(() => {
   
         const appkey = "b042048f34de31fadd86d7ae7af31d7e";
         const countryChoice = $('#user-input').val();       
-        const numOfTracks = prompt("Enter number of songs you want:");
+        const numOfTracks = 5;
         // let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
-        let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&limit=${numOfTracks}&country=${countryChoice}&api_key=${appkey}&format=json`;
+        let queryURL = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&limit=${numOfTracks}&country=${countryChoice}&api_key=${appkey}&format=json`;
     
         $.ajax({
             url: queryURL,
@@ -33,8 +33,7 @@ $(document).ready(() => {
                     let currentTrack = response.tracks.track[i].name;
                     let currentListen = response.tracks.track[i].listeners;
                     let currentArtist = response.tracks.track[i].artist.name;
-                    console.log(currentArtist)
-                    //learned how to do this in my tudoring this morning, dynamically creating HTML with the tilda key
+                    //learned how to do this in my tutoring this morning, dynamically creating HTML with the tilda key
                     let topPicks = `<div class="mdc-typography--headline6">Title: ${currentTrack}</div>
                                     <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
                                     <div class="mdc-typography--subtitle1">Listen Count: ${currentListen}</div>
