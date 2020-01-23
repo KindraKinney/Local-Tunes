@@ -44,9 +44,6 @@ $(document).ready(() => {
       });
     });
   
-  
-  });
-  
   window.onload = function() {
     var startPos;
     var geoSuccess = function(position) {
