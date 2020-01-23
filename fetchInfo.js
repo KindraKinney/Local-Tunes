@@ -1,19 +1,18 @@
 
 $(document).ready(() => {
     $('#submit').on('click', () => {
-  
-        const appkey = "b042048f34de31fadd86d7ae7af31d7e";
-        const countryChoice = $('#user-input').val();       
-        const numOfTracks = prompt("Enter number of songs you want:");
-        // let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${countryChoice}&api_key=${appkey}&format=json`;
-        let queryURL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&limit=${numOfTracks}&country=${countryChoice}&api_key=${appkey}&format=json`;
-    
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        .then(function(response) {
-            console.log(response)
+
+      let countryCode = prompt("Please enter country (ISO CODE)");
+      let makeRequest = $("<script>").attr("src", `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`)
+      $(document).append(makeRequest);
+
+      function response(musicData) {
+        let data = responseData;
+        let title = data.message.body.track_list[1].track
+        document.write(title)
+        let artist = data.message.body.track_list[1].track.artist_name
+        document.write(artist)
+      }
     
             // if we get an error in repsonse to our request, alert the user the failure message reponse
             if (response.error == 6) {
@@ -62,9 +61,6 @@ $(document).ready(() => {
           }
       });
     });
-  
-  
-  });
   
   let button = document.getElementById("get-location");
   let latText = document.getElementById("latitude");
