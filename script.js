@@ -1,49 +1,32 @@
-
 $(document).ready(() => {
-    $('#submit').on('click', () => {
-      debugger;
-
-      let countryCode = $('#user-input').val();
-      let makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`)
-      $('body').append(makeRequest);
-    });
+  $('#submit').on('click', () => {
+    const countryCode = $('#user-input').val();
+    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`)
+    $('body').append(makeRequest);
   });
 
-  function response(musicData) {
-    console.log(musicData)
-    let data = musicData;
-    let title = data.message.body.track_list[1].track
-    let artist = data.message.body.track_list[1].track.artist_name
-  }
+  const response = musicData => {
+    data = musicData;
+
             // if we get an error in repsonse to our request, alert the user the failure message reponse
             if (response.error == 6) {
                 alert(response.message)
             }
             // write API response to page for top artist in user specified country
             else{
+                let numOfTracks = data.message.body.track_list.length;
                 let trackNameArr = [];
                 let listenArr = [];
-                let trackData = {
-                    response: response,
-                    titles: trackNameArr,
-                    listens: listenArr
-                }
                 // iterate through each track and append the title of the track and its listen count to each array
                 for (let i = 0; i < numOfTracks; i++) {
-                    let currentTrack = response.tracks.track[i].name;
-                    let currentListen = response.tracks.track[i].listeners;
-                    let currentArtist = response.tracks.track[i].artist.name;
-                    let topPicks = `<div class='mdc-typography--headline6'>Title: ${currentTrack}</div>
-                                    <div class='mdc-typography--subtitle1'>Artist: ${currentArtist}</div>
-                                    <div class='mdc-typography--subtitle1'>Listen Count: ${currentListen}</div>
-                                    <br>`
-                                    $('#output-box').append(topPicks);
+                    let currentTrack = data.message.body.track_list[i].track.track_name;
+                    let currentArtist = data.message.body.track_list[i].track.artist_name;
+                    let topPicks = `<div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+                                    <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>                                    <br>`
+                                    $("#output-box").append(topPicks);
                 }
-                $('#output-box').prepend('<div class='mdc-typography--headline4'>Top Tracks</div>', '<br>');
-
           }
-      });
-    });
+        }
 
   window.onload = function() {
     var startPos;
