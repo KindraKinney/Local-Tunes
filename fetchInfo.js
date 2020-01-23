@@ -56,26 +56,26 @@ $(document).ready(() => {
   
   });
   
-  let button = document.getElementById("get-location");
-  let latText = document.getElementById("latitude");
-  let longText = document.getElementById("longitude");
+  window.onload = function() {
+    var startPos;
+    var geoSuccess = function(position) {
+      startPos = position;
+      latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
+      APIkey = "AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI";
+      queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlng + "&key=" + APIkey;
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(response => {
+        console.log(response.results[7].address_components[0].long_name);
+      });
+    };
+    navigator.geolocation.getCurrentPosition(geoSuccess);
+
+  };
   
-  button.addEventListener("click", function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      let lat = position.coords.latitude;
-      let long = position.coords.longitude;
-  
-      latText.innerText = lat.toFixed(2);
-      longText.innerText = long.toFixed(2);
-    });
-  });
-  
-  function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-  }
-  
-  
+ 
   
     //JQUERY FUNCTION FOR SETTING SONGNAME AND ARTIST NAME TO OUTPUTBOX DIV//
   //   function outputBox(){
