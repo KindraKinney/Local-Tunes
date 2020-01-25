@@ -28,6 +28,9 @@ const response = musicData => {
     });
   }
 
+  const topSongs = `
+    <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
+  `;
   const loadMore = `
     <button class='mdc-button'>
       <div class='mdc-button__ripple' id='more'></div>
@@ -35,6 +38,8 @@ const response = musicData => {
     </button>
   `;
 
+  $('#title').empty();
+  $('#title').append(topSongs);
   $('#load-box').empty();
   $('#load-box').append(loadMore);
   $('#more').on('click', () => {
