@@ -28,6 +28,15 @@ const response = musicData => {
       $('#output-box').append(topPicks);
     });
   }
+
+  const loadMore = `
+    <button class='mdc-button'>
+      <div class='mdc-button__ripple' id='more'></div>
+      <span class='mdc-button__label'>Load More</span>
+    </button>
+  `
+
+  $('#load-box').append(loadMore);
 }
 
 $(document).ready(() => {
@@ -51,7 +60,7 @@ $(document).ready(() => {
 
   $('#submit').on('click', () => {
     const countryCode = $('#user-input').val();
-    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
+    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
   });
 
