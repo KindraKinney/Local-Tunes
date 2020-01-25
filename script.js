@@ -39,6 +39,10 @@ const response = musicData => {
   $('#load-box').append(loadMore);
 }
 
+const more = () => {
+  // Adds more results to the page...
+}
+
 $(document).ready(() => {
   const inputPosition = () => {
     let startPos;
@@ -67,4 +71,8 @@ $(document).ready(() => {
   $('#get-location').on('click', () => {
     inputPosition();
   });
+
+  $('#more').on('click', () => {
+    getMore();
+  })
 });
