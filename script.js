@@ -1,3 +1,18 @@
+const response = musicData => {
+  $('#output-box').empty();
+  data = musicData;
+  const numOfTracks = data.message.body.track_list.length;
+  for (let i = 0; i < numOfTracks; i++) {
+    let currentTrack = data.message.body.track_list[i].track.track_name;
+    let currentArtist = data.message.body.track_list[i].track.artist_name;
+    let topPicks = `
+      <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+      <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
+      <br>`
+    $("#output-box").append(topPicks);
+  }
+}
+
 $(document).ready(() => {
   const inputPosition = () => {
     let startPos;
@@ -5,31 +20,16 @@ $(document).ready(() => {
       startPos = position;
       const latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
       const APIkey = 'AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI';
-      const queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&key=' + APIkey;
+      const queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?result_type=country&latlng=' + latlng + '&key=' + APIkey;
 
       $.ajax({
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $("#output-box").append(response.results[10].address_components[0].long_name);
+        $("#user-input").val(response.results[0].address_components[0].short_name);
       });
-      navigator.geolocation.getCurrentPosition(geoSuccess);
     };
-  }
-
-  const response = musicData => {
-    $('#output-box').empty();
-    data = musicData;
-    const numOfTracks = data.message.body.track_list.length;
-    for (let i = 0; i < numOfTracks; i++) {
-      let currentTrack = data.message.body.track_list[i].track.track_name;
-      let currentArtist = data.message.body.track_list[i].track.artist_name;
-      let topPicks = `
-        <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
-        <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
-        <br>`
-      $("#output-box").append(topPicks);
-    }
+    navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
   $('#submit').on('click', () => {
@@ -38,5 +38,7 @@ $(document).ready(() => {
     $('body').append(makeRequest);
   });
 
-  inputPosition();
+  $('#get-location').on('click', () => {
+    inputPosition();
+  });
 });
