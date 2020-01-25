@@ -13,7 +13,6 @@ const response = musicData => {
       url: albumURL,
       method: 'GET'
     }).then(response => {
-      console.log(response.album.image[4]['#text']);
       const art = response.album.image[4]['#text'];
       const topPicks = `
         <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
@@ -34,12 +33,16 @@ const response = musicData => {
       <div class='mdc-button__ripple' id='more'></div>
       <span class='mdc-button__label'>Load More</span>
     </button>
-  `
+  `;
 
+  $('#load-box').empty();
   $('#load-box').append(loadMore);
+  $('#more').on('click', () => {
+    getMore();
+  });
 }
 
-const more = () => {
+const getMore = () => {
   // Adds more results to the page...
 }
 
@@ -71,8 +74,4 @@ $(document).ready(() => {
   $('#get-location').on('click', () => {
     inputPosition();
   });
-
-  $('#more').on('click', () => {
-    getMore();
-  })
 });
