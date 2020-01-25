@@ -16,10 +16,13 @@ const response = musicData => {
       console.log(response.album.image[4]['#text']);
       const art = response.album.image[4]['#text'];
       const topPicks = `
-        <img src='${art}' alt='album art for this album' />
-        <div class='mdc-typography--headline6'>Title: ${currentTrack}</div>
-        <div class='mdc-typography--subtitle1'>Artist: ${currentArtist}</div>
-        <br>
+        <div class="mdc-card" style='margin: 8px'>
+          <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
+          <div class="card__primary" style='padding: 16px'>
+            <h2 class="mdc-typography mdc-typography--headline6">${currentTrack}</h2>
+            <h3 class="mdc-typography mdc-typography--subtitle2">${currentArtist}</h3>
+          </div>
+        </div>
       `
 
       $('#output-box').append(topPicks);
