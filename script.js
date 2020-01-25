@@ -50,7 +50,8 @@ $(document).ready(() => {
         url: queryURL,
         method: "GET"
       }).then(response => {
-        console.log(response.results[7].address_components[0].long_name);
+        console.log(response.results[10].address_components[0].long_name);
+        $("#output-box").append(response.results[10].address_components[0].long_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
