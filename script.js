@@ -16,9 +16,9 @@ const response = musicData => {
       console.log(response.album.image[4]['#text']);
       const art = response.album.image[4]['#text'];
       const topPicks = `
-        <div class="mdc-card" style='margin: 8px'>
+        <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
           <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
-          <div class="card__primary" style='padding: 16px'>
+          <div class="card__primary">
             <h2 class="mdc-typography mdc-typography--headline6">${currentTrack}</h2>
             <h3 class="mdc-typography mdc-typography--subtitle2">${currentArtist}</h3>
           </div>

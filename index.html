@@ -15,34 +15,35 @@
     <title>Local Tunes</title>
 </head>
 <body>
-    <div class='mdc-layout-grid'>
-        <div class='mdc-layout-grid__inner'>
-            <div class='mdc-layout-grid__cell'>
-                <div class='mdc-card'>
-                    <div class='mdc-text-field mdc-text-field--outlined mdc-text-field--no-label'>
-                            <input
-                                type='text'
-                                class='mdc-text-field__input'
-                                id='user-input'
-                                aria-label='Label'
-                                placeholder='Country Name'>
-                      </div>
-                    <button class='mdc-button'>
-                        <div class='mdc-button__ripple' id='get-location'></div>
-                        <span class='mdc-button__label'>Get My Location!</span>
-                    </button>
-                    <button class='mdc-button'>
-                        <div class='mdc-button__ripple' id='submit'></div>
-                        <span class='mdc-button__label'>Search</span>
-                    </button>
+    <div id='logo'>
+
+    </div>
+    <div id='wrapper'>
+        <div class='inline'>
+            <div class='mdc-card'>
+                <div class='mdc-text-field mdc-text-field--outlined mdc-text-field--no-label'>
+                    <input
+                        type='text'
+                        class='mdc-text-field__input'
+                        id='user-input'
+                        aria-label='Label'
+                        placeholder='Country Name'
+                    >
                 </div>
+                <button class='mdc-button'>
+                    <div class='mdc-button__ripple' id='get-location'></div>
+                    <span class='mdc-button__label'>Get My Location!</span>
+                </button>
+                <button class='mdc-button'>
+                    <div class='mdc-button__ripple' id='submit'></div>
+                    <span class='mdc-button__label'>Search</span>
+                </button>
             </div>
-            <div class='mdc-layout-grid__cell'>
-                <div class='mdc-card'>
-                    <div class='mdc-typography--headline4' style='margin: 8px; text-align: center;'>Top Tracks</div>
-                    <div id='output-box'></div>
-                </div>
+            <div id='content'>
+                <div class='mdc-typography--headline4' style='margin: 8px; text-align: center;'>Top Tracks</div>
+                <div id='output-box'></div>
             </div>
+
         </div>
     </div>
     <script src='script.js'></script>

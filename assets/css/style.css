@@ -1,0 +1,14 @@
+#wrapper {
+  text-align: center;
+}
+
+#output-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.inline {
+  display: inline-block;
+  width: 75vh;
+}
