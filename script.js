@@ -18,7 +18,7 @@ $(document).ready(() => {
   }
 
   const response = musicData => {
-    $('output-box').empty();
+    $('#output-box').empty();
     data = musicData;
     const numOfTracks = data.message.body.track_list.length;
     for (let i = 0; i < numOfTracks; i++) {
