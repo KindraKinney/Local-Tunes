@@ -1,15 +1,29 @@
 const response = musicData => {
   $('#output-box').empty();
-  data = musicData;
-  const numOfTracks = data.message.body.track_list.length;
+  let data = musicData;
+  numOfTracks = data.message.body.track_list.length;
+
   for (let i = 0; i < numOfTracks; i++) {
-    let currentTrack = data.message.body.track_list[i].track.track_name;
-    let currentArtist = data.message.body.track_list[i].track.artist_name;
-    let topPicks = `
-      <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
-      <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
-      <br>`
-    $("#output-box").append(topPicks);
+    const currentTrack = data.message.body.track_list[i].track.track_name;
+    const currentArtist = data.message.body.track_list[i].track.artist_name;
+    const currentAlbum = data.message.body.track_list[i].track.album_name;
+    const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
+
+    $.ajax({
+      url: albumURL,
+      method: 'GET'
+    }).then(response => {
+      console.log(response.album.image[4]['#text']);
+      const art = response.album.image[4]['#text'];
+      const topPicks = `
+        <img src='${art}' alt='album art for this album' />
+        <div class='mdc-typography--headline6'>Title: ${currentTrack}</div>
+        <div class='mdc-typography--subtitle1'>Artist: ${currentArtist}</div>
+        <br>
+      `
+
+      $('#output-box').append(topPicks);
+    });
   }
 }
 
@@ -26,7 +40,7 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $("#user-input").val(response.results[0].address_components[0].short_name);
+        $('#user-input').val(response.results[0].address_components[0].short_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
