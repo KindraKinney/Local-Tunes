@@ -1,3 +1,18 @@
+const response = musicData => {
+  $('#output-box').empty();
+  data = musicData;
+  const numOfTracks = data.message.body.track_list.length;
+  for (let i = 0; i < numOfTracks; i++) {
+    let currentTrack = data.message.body.track_list[i].track.track_name;
+    let currentArtist = data.message.body.track_list[i].track.artist_name;
+    let topPicks = `
+      <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+      <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
+      <br>`
+    $("#output-box").append(topPicks);
+  }
+}
+
 $(document).ready(() => {
   const inputPosition = () => {
     let startPos;
@@ -11,25 +26,10 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $("#output-box").append(response.results[10].address_components[0].long_name);
+        $("#user-input").append(response.results[10].address_components[0].long_name);
       });
       navigator.geolocation.getCurrentPosition(geoSuccess);
     };
-  }
-
-  const response = musicData => {
-    $('output-box').empty();
-    data = musicData;
-    const numOfTracks = data.message.body.track_list.length;
-    for (let i = 0; i < numOfTracks; i++) {
-      let currentTrack = data.message.body.track_list[i].track.track_name;
-      let currentArtist = data.message.body.track_list[i].track.artist_name;
-      let topPicks = `
-        <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
-        <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
-        <br>`
-      $("#output-box").append(topPicks);
-    }
   }
 
   $('#submit').on('click', () => {
@@ -38,5 +38,7 @@ $(document).ready(() => {
     $('body').append(makeRequest);
   });
 
-  inputPosition();
+  $('#get-location').on('click', () => {
+    inputPosition();
+  });
 });
