@@ -7,34 +7,27 @@ $(document).ready(() => {
 
   const response = musicData => {
     data = musicData;
+    const numOfTracks = data.message.body.track_list.length;
+    for (let i = 0; i < numOfTracks; i++) {
+      let currentTrack = data.message.body.track_list[i].track.track_name;
+      let currentArtist = data.message.body.track_list[i].track.artist_name;
+      let topPicks = `
+        <div class="mdc-typography--headline6">Title: ${currentTrack}</div>
+        <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>
+        <br>`
+      $("#output-box").append(topPicks);
+    }
+  }
 
-            // if we get an error in repsonse to our request, alert the user the failure message reponse
-            if (response.error == 6) {
-                alert(response.message)
-            }
-            // write API response to page for top artist in user specified country
-            else{
-                let numOfTracks = data.message.body.track_list.length;
-                let trackNameArr = [];
-                let listenArr = [];
-                // iterate through each track and append the title of the track and its listen count to each array
-                for (let i = 0; i < numOfTracks; i++) {
-                    let currentTrack = data.message.body.track_list[i].track.track_name;
-                    let currentArtist = data.message.body.track_list[i].track.artist_name;
-                    let topPicks = `<div class="mdc-typography--headline6">Title: ${currentTrack}</div>
-                                    <div class="mdc-typography--subtitle1">Artist: ${currentArtist}</div>                                    <br>`
-                                    $("#output-box").append(topPicks);
-                }
-          }
-        }
+  inputPosition();
 
-  window.onload = function() {
-    var startPos;
-    var geoSuccess = function(position) {
+  const inputPosition = () => {
+    let startPos;
+    const geoSuccess = position => {
       startPos = position;
-      latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
-      APIkey = 'AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI';
-      queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&key=' + APIkey;
+      const latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
+      const APIkey = 'AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI';
+      const queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&key=' + APIkey;
 
       $.ajax({
         url: queryURL,
@@ -42,7 +35,6 @@ $(document).ready(() => {
       }).then(response => {
         console.log(response.results[7].address_components[0].long_name);
       });
+      navigator.geolocation.getCurrentPosition(geoSuccess);
     };
-    navigator.geolocation.getCurrentPosition(geoSuccess);
-
-  };
+};
