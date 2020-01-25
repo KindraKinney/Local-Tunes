@@ -1,3 +1,5 @@
+
+
 $(document).ready(() => {
     $('#submit').on('click', () => {
 
@@ -8,6 +10,7 @@ $(document).ready(() => {
   });
 
   function response(musicData) {
+    $("#output-box").empty();
     console.log(musicData)
     data = musicData;
   
