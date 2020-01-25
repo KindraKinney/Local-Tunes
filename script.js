@@ -26,10 +26,11 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $("#user-input").append(response.results[10].address_components[0].long_name);
+        console.log(response.results[8].address_components[0].short_name)
+        $("#user-input").val(response.results[8].address_components[0].short_name);
       });
-      navigator.geolocation.getCurrentPosition(geoSuccess);
     };
+    navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
   $('#submit').on('click', () => {
