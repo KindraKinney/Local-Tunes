@@ -20,14 +20,13 @@ $(document).ready(() => {
       startPos = position;
       const latlng = startPos.coords.latitude + ',' + startPos.coords.longitude;
       const APIkey = 'AIzaSyDrCceye243-Te4hjHSsc7h3LcwzY-1xeI';
-      const queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&key=' + APIkey;
+      const queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?result_type=country&latlng=' + latlng + '&key=' + APIkey;
 
       $.ajax({
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        console.log(response.results[8].address_components[0].short_name)
-        $("#user-input").val(response.results[8].address_components[0].short_name);
+        $("#user-input").val(response.results[0].address_components[0].short_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
