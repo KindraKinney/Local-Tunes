@@ -12,3 +12,18 @@
   display: inline-block;
   width: 75vh;
 }
+
+#logo {
+  background-color: #59B5DE;
+  text-align: center;
+}
+
+#logoImg {
+  height: 100px;
+  display: inline-block;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
