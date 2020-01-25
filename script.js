@@ -1,3 +1,5 @@
+
+
 $(document).ready(() => {
   $('#submit').on('click', () => {
     const countryCode = $('#user-input').val();
@@ -6,6 +8,7 @@ $(document).ready(() => {
   });
 
   const response = musicData => {
+    $('output-box').empty();
     data = musicData;
     const numOfTracks = data.message.body.track_list.length;
     for (let i = 0; i < numOfTracks; i++) {
