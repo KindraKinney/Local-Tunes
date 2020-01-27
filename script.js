@@ -13,12 +13,11 @@ const response = musicData => {
       url: albumURL,
       method: 'GET'
     }).then(response => {
-      console.log(response.album.image[4]['#text']);
       const art = response.album.image[4]['#text'];
       const topPicks = `
-        <div class="mdc-card" style='margin: 8px'>
+        <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
           <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
-          <div class="card__primary" style='padding: 16px'>
+          <div class="card__primary">
             <h2 class="mdc-typography mdc-typography--headline6">${currentTrack}</h2>
             <h3 class="mdc-typography mdc-typography--subtitle2">${currentArtist}</h3>
           </div>
@@ -28,6 +27,28 @@ const response = musicData => {
       $('#output-box').append(topPicks);
     });
   }
+
+  const topSongs = `
+    <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
+  `;
+  const loadMore = `
+    <button class='mdc-button'>
+      <div class='mdc-button__ripple' id='more'></div>
+      <span class='mdc-button__label'>Load More</span>
+    </button>
+  `;
+
+  $('#title').empty();
+  $('#title').append(topSongs);
+  $('#load-box').empty();
+  $('#load-box').append(loadMore);
+  $('#more').on('click', () => {
+    getMore();
+  });
+}
+
+const getMore = () => {
+  // Adds more results to the page...
 }
 
 $(document).ready(() => {
@@ -51,7 +72,7 @@ $(document).ready(() => {
 
   $('#submit').on('click', () => {
     const countryCode = $('#user-input').val();
-    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
+    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
   });
 

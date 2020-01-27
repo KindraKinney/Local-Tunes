@@ -1,0 +1,29 @@
+#wrapper {
+  text-align: center;
+}
+
+#output-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.inline {
+  display: inline-block;
+  width: 75vw;
+}
+
+#logo {
+  background-color: #6240bc;
+  text-align: center;
+}
+
+#logoImg {
+  height: 100px;
+  display: inline-block;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

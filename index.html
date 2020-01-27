@@ -8,6 +8,7 @@
     <link href='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+    <link rel='icon' href='assets/images/Final-logo.ico' type='image/icon'>
 
     <script src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
@@ -15,33 +16,39 @@
     <title>Local Tunes</title>
 </head>
 <body>
-    <div class='mdc-layout-grid'>
-        <div class='mdc-layout-grid__inner'>
-            <div class='mdc-layout-grid__cell'>
-                <div class='mdc-card'>
-                    <div class='mdc-text-field mdc-text-field--outlined mdc-text-field--no-label'>
-                            <input
-                                type='text'
-                                class='mdc-text-field__input'
-                                id='user-input'
-                                aria-label='Label'
-                                placeholder='Country Name'>
-                      </div>
-                    <button class='mdc-button'>
-                        <div class='mdc-button__ripple' id='get-location'></div>
-                        <span class='mdc-button__label'>Get My Location!</span>
-                    </button>
-                    <button class='mdc-button'>
-                        <div class='mdc-button__ripple' id='submit'></div>
-                        <span class='mdc-button__label'>Search</span>
-                    </button>
+    <div id='logo'>
+        <img src='assets/images/Final-logo.png' id='logoImg' />
+    </div>
+    <br />
+    <div id='wrapper'>
+        <div class='inline'>
+            <div class='mdc-card'>
+                <div class='mdc-text-field mdc-text-field--outlined mdc-text-field--no-label'>
+                    <input
+                        type='text'
+                        class='mdc-text-field__input'
+                        id='user-input'
+                        aria-label='Label'
+                        placeholder='Country Name'
+                    >
                 </div>
+                <button class='mdc-button'>
+                    <div class='mdc-button__ripple' id='get-location'></div>
+                    <span class='mdc-button__label'>Get My Location!</span>
+                </button>
+                <button class='mdc-button'>
+                    <div class='mdc-button__ripple' id='submit'></div>
+                    <span class='mdc-button__label'>Search</span>
+                </button>
             </div>
-            <div class='mdc-layout-grid__cell'>
-                <div class='mdc-card'>
-                    <div class='mdc-typography--headline4' style='margin: 8px; text-align: center;'>Top Tracks</div>
-                    <div id='output-box'></div>
-                </div>
+            <br />
+            <div id='content'>
+                <div id='title'></div>
+                <br />
+                <div id='output-box'></div>
+                <br />
+                <div id='load-box'></div>
+                <br />
             </div>
         </div>
     </div>
