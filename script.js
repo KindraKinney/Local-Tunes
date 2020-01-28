@@ -11,39 +11,32 @@ const response = musicData => {
     const currentAlbum = data.message.body.track_list[i].track.album_name;
     const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
     const topTracksURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
-    const moreFromArtist = ''
-
-   $.ajax({
-          url: topTracksURL,
-          method: 'GET'
-        }).then(response => {
-          const moreFromArtist = response.toptracks.track[0].url;
-          console.log(moreFromArtist)
-        })
-        
-      // console.log(albumURL)
-
 
     $.ajax({
       url: albumURL,
       method: 'GET'
     }).then(response => {
-      const art = response.album.image[4]['#text'];
-      const topPicks = `
-        <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
-          <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
-          <div class="card__primary">
-            <h2 class="mdc-typography mdc-typography--headline6">${currentTrack}</h2>
-            <h3 class="mdc-typography mdc-typography--subtitle2">${currentArtist}</h3>
-            <button class='mdc-button' onclick='window.location.href =${moreFromArtist};'>
-            <div class='mdc-button__ripple' id='discover'></div>
-            <span class='mdc-button__label'>Discover Artist</span>
-          </button>
-          </div>
-        </div>
-      `
 
-      $('#output-box').append(topPicks);
+      $.ajax({
+        url: topTracksURL,
+        method: 'GET'
+      }).then(discover => {
+        const moreFromArtist = discover.toptracks.track[0].url;
+        const art = response.album.image[4]['#text'];
+        const topPicks = `
+          <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
+            <a class="mdc-card__primary-action" href='${moreFromArtist}' target='_blank'>
+              <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
+            </a>
+            <div style='display: flex; flex: 0 1 auto; flex-direction: column'>
+              <h4 class="mdc-typography mdc-typography--subtitle5" style='margin: 8px;'>${currentTrack}</h4>
+              <h5 class="mdc-typography mdc-typography--subtitle2" style='margin: 8px; justify-content: end;'>${currentArtist}</h5>
+            </div>
+          </div>
+        `
+
+        $('#output-box').append(topPicks);
+      });
     });
   }
 
@@ -64,7 +57,7 @@ const moreFromArtist = ''
   $('#title').append(topSongs);
   $('#load-box').empty();
   $('#load-box').append(loadMore);
-  $('#more').on('click', event => {
+  $('#more').on('click', () => {
     getMore();
   });
 }
