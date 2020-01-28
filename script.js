@@ -1,3 +1,5 @@
+let itemsLoaded = 9;
+
 const response = musicData => {
   $('#output-box').empty();
   let data = musicData;
@@ -50,6 +52,7 @@ const moreFromArtist = ''
   const topSongs = `
     <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
   `;
+
   const loadMore = `
     <button class='mdc-button'>
       <div class='mdc-button__ripple' id='more'></div>
@@ -61,13 +64,29 @@ const moreFromArtist = ''
   $('#title').append(topSongs);
   $('#load-box').empty();
   $('#load-box').append(loadMore);
-  $('#more').on('click', () => {
+  $('#more').on('click', event => {
     getMore();
   });
 }
 
+// Used to convert our country names to iso for later and each first char must be uppercase
+function capitalizeCountry(country)
+{
+ return country.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function countryToIso(country) {
+  return countryNames[capitalizeCountry(country)];
+}
+
 const getMore = () => {
   // Adds more results to the page...
+  itemsLoaded += 3;
+  const currentInputVal = $('#user-input').val();
+  $('#user-input').val('');
+  const countryCode = countryToIso(currentInputVal);
+  const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=${itemsLoaded}&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
+  $('body').append(makeRequest);
 }
 
 $(document).ready(() => {
@@ -83,15 +102,18 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $('#user-input').val(response.results[0].address_components[0].short_name);
+        $('#user-input').val(response.results[0].address_components[0].long_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
   $('#submit').on('click', () => {
-    const countryCode = $('#user-input').val();
-    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
+    itemsLoaded = 3;
+    const currentInputVal = $('#user-input').val();
+    $('#user-input').val('');
+    const countryCode = countryToIso(currentInputVal);
+    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=${itemsLoaded}&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
   });
 
