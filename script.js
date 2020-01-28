@@ -8,6 +8,19 @@ const response = musicData => {
     const currentArtist = data.message.body.track_list[i].track.artist_name;
     const currentAlbum = data.message.body.track_list[i].track.album_name;
     const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
+    const topTracksURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
+    const moreFromArtist = ''
+
+   $.ajax({
+          url: topTracksURL,
+          method: 'GET'
+        }).then(response => {
+          const moreFromArtist = response.toptracks.track[0].url;
+          console.log(moreFromArtist)
+        })
+        
+      // console.log(albumURL)
+
 
     $.ajax({
       url: albumURL,
@@ -20,6 +33,10 @@ const response = musicData => {
           <div class="card__primary">
             <h2 class="mdc-typography mdc-typography--headline6">${currentTrack}</h2>
             <h3 class="mdc-typography mdc-typography--subtitle2">${currentArtist}</h3>
+            <button class='mdc-button' onclick='window.location.href =${moreFromArtist};'>
+            <div class='mdc-button__ripple' id='discover'></div>
+            <span class='mdc-button__label'>Discover Artist</span>
+          </button>
           </div>
         </div>
       `
@@ -27,6 +44,8 @@ const response = musicData => {
       $('#output-box').append(topPicks);
     });
   }
+
+const moreFromArtist = ''
 
   const topSongs = `
     <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
@@ -80,3 +99,5 @@ $(document).ready(() => {
     inputPosition();
   });
 });
+
+
