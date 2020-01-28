@@ -24,13 +24,13 @@ const response = musicData => {
         const moreFromArtist = discover.artist.url;
         const art = response.album.image[4]['#text'];
         const topPicks = `
-          <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
+          <div class="mdc-card" id="song-cards">
             <a class="mdc-card__primary-action" href='${moreFromArtist}' target='_blank'>
               <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
             </a>
-            <div style='display: flex; flex: 1; flex-direction: column; align-items: center;'>
-              <h4 class="mdc-typography mdc-typography--subtitle5" style='margin: 8px; display: flex; flex: 1 1 auto;'>${currentTrack}</h4>
-              <h5 class="mdc-typography mdc-typography--subtitle2" style='margin: 8px; display: flex; flex: 0 1 auto;'>${currentArtist}</h5>
+            <div id="song-info">
+              <h4 class="mdc-typography mdc-typography--subtitle5" id="current-track">${currentTrack}</h4>
+              <h5 class="mdc-typography mdc-typography--subtitle2"  id="current-artist">${currentArtist}</h5>
             </div>
           </div>
         `
@@ -43,7 +43,7 @@ const response = musicData => {
 const moreFromArtist = ''
 
   const topSongs = `
-    <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
+    <div class='mdc-typography--headline4' id="top-tracks">Top Tracks</div>
   `;
 
   const loadMore = `
