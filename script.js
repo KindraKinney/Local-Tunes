@@ -10,7 +10,7 @@ const response = musicData => {
     const currentArtist = data.message.body.track_list[i].track.artist_name;
     const currentAlbum = data.message.body.track_list[i].track.album_name;
     const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
-    const topTracksURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
+    const topTracksURL = `http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
 
     $.ajax({
       url: albumURL,
@@ -21,7 +21,7 @@ const response = musicData => {
         url: topTracksURL,
         method: 'GET'
       }).then(discover => {
-        const moreFromArtist = discover.toptracks.track[0].url;
+        const moreFromArtist = discover.artist.url;
         const art = response.album.image[4]['#text'];
         const topPicks = `
           <div class="mdc-card" style='flex: 0 1 32%; margin-bottom: 8px'>
