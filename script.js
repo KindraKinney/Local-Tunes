@@ -31,6 +31,7 @@ const response = musicData => {
   const topSongs = `
     <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
   `;
+
   const loadMore = `
     <button class='mdc-button'>
       <div class='mdc-button__ripple' id='more'></div>
@@ -85,12 +86,10 @@ $(document).ready(() => {
   }
 
   $('#submit').on('click', () => {
-    debugger;
-    let currentInputVal = $('#user-input').val();
-    let countryCapitalized = capitalizeCountry(currentInputVal);
-    // convert our users typed country to the iso code we use later in our api call to musixmatch
-    $('#user-input').val(countryCapitalized);
-    $('#user-input').attr("data-country", );
+    const currentInputVal = $('#user-input').val();
+    $('#user-input').val('');
+    const countryCode = countryToIso(currentInputVal);
+    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
   });
 
