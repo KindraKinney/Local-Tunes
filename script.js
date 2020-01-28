@@ -43,7 +43,7 @@ const response = musicData => {
 const moreFromArtist = ''
 
   const topSongs = `
-    <div class='mdc-typography--headline4' style='color: #6240bc' margin: 8px; text-align: center;'>Top Tracks</div>
+    <div class='mdc-typography--headline4' id="top-tracks">Top Tracks</div>
   `;
 
   const loadMore = `
