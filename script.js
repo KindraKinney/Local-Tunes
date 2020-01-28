@@ -75,11 +75,7 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        responseCountryName = response.results[0].address_components[0].short_name.toUpperCase();
-        // convert our users typed country to the iso code we use later in our api call to musixmatch
-        $('#user-input').val(countryConvert);
-        $('#user-input').attr("data-country", response.results[0].address_components[0].short_name);
-        startCountryConvert();
+        $('#user-input').val(response.results[0].address_components[0].long_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
