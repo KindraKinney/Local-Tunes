@@ -28,9 +28,9 @@ const response = musicData => {
             <a class="mdc-card__primary-action" href='${moreFromArtist}' target='_blank'>
               <div class="mdc-card__media mdc-card__media--square demo-card__media" style="background-image: url(&quot;${art};);"></div>
             </a>
-            <div style='display: flex; flex: 0 1 auto; flex-direction: column'>
-              <h4 class="mdc-typography mdc-typography--subtitle5" style='margin: 8px;'>${currentTrack}</h4>
-              <h5 class="mdc-typography mdc-typography--subtitle2" style='margin: 8px; justify-content: end;'>${currentArtist}</h5>
+            <div style='display: flex; flex: 1; flex-direction: column; align-items: center;'>
+              <h4 class="mdc-typography mdc-typography--subtitle5" style='margin: 8px; display: flex; flex: 1 1 auto;'>${currentTrack}</h4>
+              <h5 class="mdc-typography mdc-typography--subtitle2" style='margin: 8px; display: flex; flex: 0 1 auto;'>${currentArtist}</h5>
             </div>
           </div>
         `
