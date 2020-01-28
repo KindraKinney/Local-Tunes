@@ -47,6 +47,16 @@ const response = musicData => {
   });
 }
 
+// Used to convert our country names to iso for later and each first char must be uppercase
+function capitalizeCountry(country)
+{
+ return country.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function countryToIso(country) {
+  return countryNames[capitalizeCountry(country)];
+}
+
 const getMore = () => {
   // Adds more results to the page...
 }
@@ -64,15 +74,23 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $('#user-input').val(response.results[0].address_components[0].short_name);
+        responseCountryName = response.results[0].address_components[0].short_name.toUpperCase();
+        // convert our users typed country to the iso code we use later in our api call to musixmatch
+        $('#user-input').val(countryConvert);
+        $('#user-input').attr("data-country", response.results[0].address_components[0].short_name);
+        startCountryConvert();
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
   $('#submit').on('click', () => {
-    const countryCode = $('#user-input').val();
-    const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
+    debugger;
+    let currentInputVal = $('#user-input').val();
+    let countryCapitalized = capitalizeCountry(currentInputVal);
+    // convert our users typed country to the iso code we use later in our api call to musixmatch
+    $('#user-input').val(countryCapitalized);
+    $('#user-input').attr("data-country", );
     $('body').append(makeRequest);
   });
 

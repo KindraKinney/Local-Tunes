@@ -1,9 +1,3 @@
-const countryConvert = typedCountry => {
-
-    console.log(countryNames);
-
-}
-
 let countryNames = {
     "Bangladesh": "BD",
     "Belgium": "BE",
@@ -255,4 +249,4 @@ let countryNames = {
     "Ukraine": "UA",
     "Qatar": "QA",
     "Mozambique": "MZ",
- }
+}
