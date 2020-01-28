@@ -1,8 +1,9 @@
 const countryConvert = typedCountry => {
-    let lowCase = typedCountry.toUpperCase();
-    if(countryNames[lowCase] === undefined) {
-        console.log("Country not found!")
+    let countryToSearch = responseCountryName;
+    if(countryNames[countryToSearch] === undefined) {
+        alert("Please enter a valid country!")
     }else{
         console.log("Country Found");
+        return countryNames[countryToSearch];
     }
 }

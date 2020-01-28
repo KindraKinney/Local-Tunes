@@ -64,14 +64,19 @@ $(document).ready(() => {
         url: queryURL,
         method: 'GET'
       }).then(response => {
-        $('#user-input').val(response.results[0].address_components[0].short_name);
+        responseCountryName = response.results[0].address_components[0].short_name.toUpperCase();
+        // convert our users typed country to the iso code we use later in our api call to musixmatch
+        $('#user-input').val(countryConvert)
+        $('#user-input').attr("data-country", response.results[0].address_components[0].short_name);
       });
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
   }
 
   $('#submit').on('click', () => {
-    const countryCode = $('#user-input').val();
+    debugger;
+    // We use the data-country attr val since its the ISO country code needed for the request
+    const countryCode = $('#user-input').data('country');
     const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=9&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
   });
