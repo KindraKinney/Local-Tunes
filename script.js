@@ -76,7 +76,6 @@ const getMore = () => {
   // Adds more results to the page...
   itemsLoaded += 3;
   const currentInputVal = $('#user-input').val();
-  $('#user-input').val('');
   const countryCode = countryToIso(currentInputVal);
   const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=${itemsLoaded}&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
   $('body').append(makeRequest);
@@ -104,7 +103,6 @@ $(document).ready(() => {
   $('#submit').on('click', () => {
     itemsLoaded = 3;
     const currentInputVal = $('#user-input').val();
-    $('#user-input').val('');
     const countryCode = countryToIso(currentInputVal);
     const makeRequest = $('<script>').attr('src', `https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=jsonp&callback=response&page_size=${itemsLoaded}&country=${countryCode}&apikey=744d96e601e068c973cbbc1a33372ce4`);
     $('body').append(makeRequest);
