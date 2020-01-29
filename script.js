@@ -9,8 +9,8 @@ const response = musicData => {
     const currentTrack = data.message.body.track_list[i].track.track_name;
     const currentArtist = data.message.body.track_list[i].track.artist_name;
     const currentAlbum = data.message.body.track_list[i].track.album_name;
-    const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
-    const topTracksURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
+    const albumURL = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=b042048f34de31fadd86d7ae7af31d7e&autocorrect=1&artist=${currentArtist}&album=${currentAlbum}&format=json`;
+    const topTracksURL = `https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${currentArtist}&api_key=b042048f34de31fadd86d7ae7af31d7e&format=json`
     const moreFromArtist = ''
 
    $.ajax({
