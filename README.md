@@ -2,7 +2,7 @@
 
 Local Tunes is a music aggregation tool for each country's top tracks based off of user location, or user input.
 
-![songPage](https://imgur.com/03124d05-7475-4984-8998-6fe9f7baf021)
+![songPage](https://i.imgur.com/poVvbRq.png)
 
 ## Features
 
