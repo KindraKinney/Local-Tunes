@@ -27,7 +27,7 @@ Production Page: https://kindrakinney.github.io/Local-Tunes/
 
 ## API's Used:
 
-Material.io (A CSS Framework): https://material.io/
-Google Maps: https://developers.google.com/maps/documentation/
-MusixMatch: https://developer.musixmatch.com/
-Last.FM: https://www.last.fm/api/
+* Material.io (A CSS Framework): https://material.io/
+* Google Maps: https://developers.google.com/maps/documentation/* 
+* MusixMatch: https://developer.musixmatch.com/
+* Last.FM: https://www.last.fm/api/
