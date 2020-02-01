@@ -14,7 +14,7 @@ Local Tunes is a music aggregation tool for each country's top tracks based off 
 * Visit https://kindrakinney.github.io/Local-Tunes/
 
 ## Known Bugs
-* "LOAD MORE" appends results from USA only, not the user specified country.
+* ~~"LOAD MORE" appends results from USA only, not the user specified country.
 * Songs don't load in perfect order by popularity (When you load more results, they usually scramble, making it harder for someone to keep their place on where they left off before they hit load more)
 * If one of the top artists isn't found on the last.fm list, it will recieve an error 6 message and not render anything to page.
 
